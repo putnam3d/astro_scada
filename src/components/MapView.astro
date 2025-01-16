@@ -1,0 +1,32 @@
+---
+const { lat = 37.7749, lon = -122.4194, zoom = 13, markerLabel = 'San Francisco' } = Astro.props;
+import 'leaflet/dist/leaflet.css';
+---
+
+<div id="map" style="height: 400px;"></div>
+
+<!-- Load Leaflet script dynamically in the browser -->
+<script type="module">
+  if (typeof window !== 'undefined') {
+    // Dynamically load the Leaflet library if it's not loaded yet
+    import('https://unpkg.com/leaflet/dist/leaflet.js').then(() => {
+      // Ensure the map is initialized once Leaflet is available
+      const mapElement = document.getElementById('map');
+      if (mapElement) {
+        const map = L.map(mapElement).setView([lat, lon], zoom);
+
+        // Add OpenStreetMap tile layer
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+          attribution: '© OpenStreetMap contributors',
+          maxZoom: 19,
+        }).addTo(map);
+
+        // Add a marker at the provided coordinates
+        L.marker([lat, lon])
+          .addTo(map)
+          .bindPopup(markerLabel)
+          .openPopup();
+      }
+    });
+  }
+</script>

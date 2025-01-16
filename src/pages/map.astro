@@ -1,0 +1,13 @@
+---
+import MapView from '../components/MapView.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+//import Layout from '../layouts/Layout.astro';
+
+// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
+// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+---
+
+<BaseLayout>
+	<MapView lat={37.7749} lon={-122.4194} zoom={13} markerLabel="San Francisco" />
+</BaseLayout>
